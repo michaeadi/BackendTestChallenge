@@ -5,8 +5,6 @@ import io.restassured.path.json.JsonPath;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 

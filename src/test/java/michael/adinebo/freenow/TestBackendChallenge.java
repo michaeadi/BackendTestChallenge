@@ -1,7 +1,6 @@
 package michael.adinebo.freenow;
 
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.junit.Assert;
 import org.junit.Test;

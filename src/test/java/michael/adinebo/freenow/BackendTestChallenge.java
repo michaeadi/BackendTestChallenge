@@ -27,6 +27,7 @@ public class BackendTestChallenge {
                 contentType(ContentType.JSON);
     }
 
+    //Search for the user.
     @Test
     public void SearchUser() {
         HashMap<?, ?> userDetail = null;
@@ -34,12 +35,27 @@ public class BackendTestChallenge {
                 when().
                 get("https://jsonplaceholder.typicode.com/users").
                 asString()).getList("");
-       for (HashMap<?, ?> user : users) {
-           if (user.get("username").equals(userName)) {
-               userDetail = user;
-           }
-       }
-       System.out.println(userDetail);
+        for (HashMap<?, ?> user : users) {
+            if (user.get("username").equals(userName)) {
+                userDetail = user;
+            }
+        }
+        SearchUserPost(userDetail);
+    }
+
+    //Use the details fetched to make a search for the posts written by the user
+    public void SearchUserPost(HashMap<?, ?> userDetail) {
+        List<HashMap<?, ?>> posts  = from(given().
+                when().
+                get("https://jsonplaceholder.typicode.com/posts").
+                asString()).getList("");
+        for (HashMap<?, ?> post : posts) {
+            if (post.get("userId").equals(userDetail.get("id"))) {
+                System.out.println(post.get("id"));
+            }
+
+        }
+
     }
 
 }

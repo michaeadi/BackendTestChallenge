@@ -11,7 +11,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static io.restassured.path.json.JsonPath.from;
 
-public class BackendTestChallenge {
+public class TestBackendChallenge {
 
     String userName = "Samantha";
 

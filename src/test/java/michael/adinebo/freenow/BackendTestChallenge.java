@@ -2,6 +2,8 @@ package michael.adinebo.freenow;
 
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
+import org.apache.commons.validator.routines.EmailValidator;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -59,12 +61,12 @@ public class BackendTestChallenge {
     //For each post, fetch the comments and validate if the emails in the comment
     //section are in the proper format
     public void ValidateCommentsEmails(HashMap<?, ?> post) {
-        List<HashMap<?, ?>> comments  = from(given().
+        List<HashMap<String, String>> comments  = from(given().
                 when().
                 get("https://jsonplaceholder.typicode.com/comments").
                 asString()).getList("");
-        for (HashMap<?, ?> comment : comments) {
-            System.out.println(comment.get("email"));
+        for (HashMap<String, String> comment : comments) {
+            Assert.assertTrue(EmailValidator.getInstance(false).isValid(comment.get("email")));
         }
     }
 

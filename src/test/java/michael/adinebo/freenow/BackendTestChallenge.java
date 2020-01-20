@@ -51,11 +51,21 @@ public class BackendTestChallenge {
                 asString()).getList("");
         for (HashMap<?, ?> post : posts) {
             if (post.get("userId").equals(userDetail.get("id"))) {
-                System.out.println(post.get("id"));
+                ValidateCommentsEmails(post);
             }
-
         }
+    }
 
+    //For each post, fetch the comments and validate if the emails in the comment
+    //section are in the proper format
+    public void ValidateCommentsEmails(HashMap<?, ?> post) {
+        List<HashMap<?, ?>> comments  = from(given().
+                when().
+                get("https://jsonplaceholder.typicode.com/comments").
+                asString()).getList("");
+        for (HashMap<?, ?> comment : comments) {
+            System.out.println(comment.get("email"));
+        }
     }
 
 }

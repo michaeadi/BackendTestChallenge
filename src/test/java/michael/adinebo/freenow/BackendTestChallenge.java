@@ -18,7 +18,7 @@ public class BackendTestChallenge {
     String userName = "Samantha";
 
     @Test
-    public void TestAPILive() {
+    public void testTestAPILive() {
         given().
                 when().
                 get("https://jsonplaceholder.typicode.com/users").
@@ -31,7 +31,7 @@ public class BackendTestChallenge {
 
     //Search for the user.
     @Test
-    public void SearchUser() {
+    public void testSearchUser() {
         HashMap<?, ?> userDetail = null;
         List<HashMap<?, ?>> users  = from(given().
                 when().
@@ -42,25 +42,25 @@ public class BackendTestChallenge {
                 userDetail = user;
             }
         }
-        SearchUserPost(userDetail);
+        testSearchUserPost(userDetail);
     }
 
     //Use the details fetched to make a search for the posts written by the user
-    public void SearchUserPost(HashMap<?, ?> userDetail) {
+    public void testSearchUserPost(HashMap<?, ?> userDetail) {
         List<HashMap<?, ?>> posts  = from(given().
                 when().
                 get("https://jsonplaceholder.typicode.com/posts").
                 asString()).getList("");
         for (HashMap<?, ?> post : posts) {
             if (post.get("userId").equals(userDetail.get("id"))) {
-                ValidateCommentsEmails(post);
+                testValidateCommentsEmails(post);
             }
         }
     }
 
     //For each post, fetch the comments and validate if the emails in the comment
     //section are in the proper format
-    public void ValidateCommentsEmails(HashMap<?, ?> post) {
+    public void testValidateCommentsEmails(HashMap<?, ?> post) {
         List<HashMap<String, String>> comments  = from(given().
                 when().
                 get("https://jsonplaceholder.typicode.com/comments").

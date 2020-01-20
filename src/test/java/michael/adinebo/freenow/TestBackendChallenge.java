@@ -67,4 +67,19 @@ public class TestBackendChallenge {
         }
     }
 
+    @Test
+    public void TestSearchUser_1() {
+        HashMap<?, ?> userDetail = null;
+        List<HashMap<?, ?>> users  = from(given().
+                when().
+                get("https://jsonplaceholder.typicode.com/users").
+                asString()).getList("");
+        for (HashMap<?, ?> user : users) {
+            if (user.get("username").equals("MichaelAdinebo")) {
+                userDetail = user;
+            }
+        }
+        Assert.assertNull(userDetail);
+    }
+
 }
